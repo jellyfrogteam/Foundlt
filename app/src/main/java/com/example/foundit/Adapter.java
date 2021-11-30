@@ -2,6 +2,8 @@ package com.example.foundit;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,13 +51,20 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
         holder.content_img.setImageResource(dataModels.get(position).list_img);
         holder.stamp_cnt.setText(dataModels.get(position).list_stamp_cnt);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
-                notifyItemChanged(position);
-                itemClickListener.onClick(holder.itemView, position);
+            public void run() {
+                holder.findStamp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.d("test", String.valueOf(position));
+                        Log.d("spinnerRV", String.valueOf(MainActivity.rvArray.get(position)));
+
+                    }
+                });
             }
-        });
+        }, 1000); //딜레이 타임 조절
 
     }
 

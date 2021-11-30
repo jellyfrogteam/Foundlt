@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     Spinner spinner;
     Intent mapIntent;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    static ArrayList<String> rvArray = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -111,47 +112,65 @@ public class MainActivity extends AppCompatActivity {
                 switch (position){
                     case 0 : {
                         dataModels.clear();
+                        rvArray.clear();
                         dataModels.add(new dataModel("롯데월드","서울 송파구 올림픽로 240",R.drawable.lotteworld_img,"(최대)3!"));
                         dataModels.add(new dataModel("여의도 한강공원","서울 영등포구 여의동로 330 한강사업본부 여의도안내센터",R.drawable.hangang_img,"(최대)5!"));
+                        rvArray.add("롯데월드");
+                        rvArray.add("여의도 한강공원");
                         adapter.notifyDataSetChanged();
                         break;
                     }
                     case 1 : {
                         dataModels.clear();
+                        rvArray.clear();
                         dataModels.add(new dataModel("송월동동화마을","인천 중구 송월동3가",R.drawable.donghwa_img,"(최대)3!"));
                         dataModels.add(new dataModel("월미도","인천 중구 북성동1가 98-352",R.drawable.wallmido_img,"(최대)4!"));
+                        rvArray.add("송월동동화마을");
+                        rvArray.add("월미도");
                         adapter.notifyDataSetChanged();
                         break;
                     }
                     case 2 : {
                         dataModels.clear();
+                        rvArray.clear();
                         dataModels.add(new dataModel("에버랜드","경기 용인시 처인구 포곡읍 에버랜드로 199",R.drawable.everland_img,"(최대)3!"));
                         dataModels.add(new dataModel("한국민속촌","경기 용인시 기흥구 민속촌로 90 한국민속촌",R.drawable.min_img,"(최대)5!"));
+                        rvArray.add("에버랜드");
+                        rvArray.add("한국민속촌");
                         adapter.notifyDataSetChanged();
                         break;
                     }
                     case 3 : {
                         dataModels.clear();
+                        rvArray.clear();
                         dataModels.add(new dataModel("대관령양떼목장","강원 평창군 대관령면 대관령마루길 483-32 대관령양떼목장",R.drawable.sheep_img,"(최대)5!"));
                         dataModels.add(new dataModel("bts 버스정류장","강원 강릉시 주문진읍 향호리 8-55",R.drawable.bts_img,"(최대)1!"));
+                        rvArray.add("대관령양떼목장");
+                        rvArray.add("bts 버스정류장");
                         adapter.notifyDataSetChanged();
                         break;
                     }
                     case 4 : {
                         dataModels.clear();
+                        rvArray.clear();
                         dataModels.add(new dataModel("청주랜드동물원","충북 청주시 상당구 명암로 224",R.drawable.cheong_img,"(최대)3!"));
+                        rvArray.add("청주랜드동물원");
                         adapter.notifyDataSetChanged();
                         break;
                     }
                     case 5 : {
                         dataModels.clear();
+                        rvArray.clear();
                         dataModels.add(new dataModel("경주월드","경북 경주시 보문로 544",R.drawable.gyongworld_img,"(최대)4!"));
+                        rvArray.add("경주월드");
                         adapter.notifyDataSetChanged();
                         break;
                     }
                     case 6 : {
                         dataModels.clear();
+                        rvArray.clear();
                         dataModels.add(new dataModel("전주 한옥마을","전북 전주시 완산구 기린대로 99",R.drawable.hanok_img,"(최대)5!"));
+                        rvArray.add("전주 한옥마을");
                         adapter.notifyDataSetChanged();
                         break;
                     }
