@@ -1,16 +1,21 @@
 package com.example.foundit;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView userImg;
     TextView profile_name;
     Spinner spinner;
+    Intent mapIntent;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @RequiresApi(api = Build.VERSION_CODES.R)
@@ -43,18 +49,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         ArrayList<dataModel> dataModels = new ArrayList();
         dataModels.add(new dataModel("안산호수공원","안산시 안산로",R.drawable.jjj1,"3"));
 //        dataModels.add(new dataModel("안산호수공원2","안산시 안산로232",R.drawable.samplebg,"5"));
 //        dataModels.add(new dataModel("안산호수공원3","안산시 안산로323",R.drawable.samplebg,"2"));
 //        dataModels.add(new dataModel("안산호수공원4","안산시 안산로434",R.drawable.samplebg,"6"));
         Intent Shop = new Intent(this,Shop.class);
+        mapIntent = new Intent(this, Map.class);
 
         recyclerView = findViewById(R.id.main_rv);
         adapter = new Adapter(this,dataModels);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
 
+        adapter.setItemClickListener(new Adapter.ItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Log.d("RVPositon", String.valueOf(position));
+                startActivity(mapIntent);
+            }
+        });
 
         profile_name = findViewById(R.id.profile_name);
         userImg = findViewById(R.id.profile_img);
@@ -148,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
 
 
     }
