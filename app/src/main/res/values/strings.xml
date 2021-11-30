@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">FoundIt</string>
+    <string name="kakao_app_key">4501290d024e16e12f7bb36c771d585f</string>
+    <string name="kakao_native_key">kakao4501290d024e16e12f7bb36c771d585f</string>
+<!--    <string name="default_web_client_id">883604166964-omvhuu9baah7ka8u3g576uk1v6goeaeg.apps.googleusercontent.com</string>-->
+</resources>
