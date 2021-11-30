@@ -21,8 +21,10 @@ import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
     ArrayList<dataModel> dataModels;
+    Context mContext;
     private ItemClickListener itemClickListener;
     Adapter(Context context, ArrayList<dataModel> dataModels) {
+        this.mContext = context;
         this.dataModels = dataModels;
     }
 
@@ -61,6 +63,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
                         Log.d("test", String.valueOf(position));
                         Log.d("spinnerRV", String.valueOf(MainActivity.rvArray.get(position)));
 
+                        Intent mapIntent = new Intent(mContext, Map.class);
+                        mContext.startActivity(mapIntent);
                     }
                 });
             }

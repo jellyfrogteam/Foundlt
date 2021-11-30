@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     static ArrayList<String> rvArray = new ArrayList<>();
 
+
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,17 +61,9 @@ public class MainActivity extends AppCompatActivity {
         mapIntent = new Intent(this, Map.class);
 
         recyclerView = findViewById(R.id.main_rv);
-        adapter = new Adapter(this,dataModels);
+        adapter = new Adapter(this, dataModels);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
-
-        adapter.setItemClickListener(new Adapter.ItemClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                Log.d("RVPositon", String.valueOf(position));
-                startActivity(mapIntent);
-            }
-        });
 
         profile_name = findViewById(R.id.profile_name);
         userImg = findViewById(R.id.profile_img);
@@ -104,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                startActivity(Shop);
             }
         });
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
