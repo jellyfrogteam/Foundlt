@@ -70,6 +70,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
             }
         }, 1000); //딜레이 타임 조절
 
+
+
     }
 
     @Override

@@ -14,4 +14,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="100dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btn_zoom_plus"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:textAlignment="center"
+            android:text="+"
+            android:textSize="30sp"
+            android:background="@drawable/style_btn_zoom" />
+
+        <Button
+            android:id="@+id/btn_zoom_minus"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:textAlignment="center"
+            android:text="-"
+            android:textSize="30sp"
+            android:background="@drawable/style_btn_zoom" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

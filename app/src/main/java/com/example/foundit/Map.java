@@ -4,13 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 public class Map extends AppCompatActivity {
+
+    Button btn_zoomPlus;
+    Button btn_zoomMinus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,5 +49,25 @@ public class Map extends AppCompatActivity {
         marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
 
         mapView.addPOIItem(marker);
+
+        btn_zoomPlus = findViewById(R.id.btn_zoom_plus);
+        btn_zoomMinus = findViewById(R.id.btn_zoom_minus);
+        // 줌 레벨 변경
+        mapView.setZoomLevel(7, true);
+        btn_zoomPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 줌 인
+                mapView.zoomIn(true);
+            }
+        });
+
+        btn_zoomMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 줌 아웃
+                mapView.zoomOut(true);
+            }
+        });
     }
 }
