@@ -24,6 +24,10 @@ public class Map extends AppCompatActivity {
 
         // java code
         MapView mapView = new MapView(this);
+
+        CustomCalloutBalloonAdapter balloonAdapter = new CustomCalloutBalloonAdapter(getApplicationContext());
+        mapView.setCalloutBalloonAdapter(balloonAdapter);
+
 //
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
@@ -40,15 +44,20 @@ public class Map extends AppCompatActivity {
 //
 //        mapView.addPOIItem(customMarker);
 
-        MapPOIItem marker = new MapPOIItem();
-        mapView.setMapCenterPoint(markerPoint, true);
-        marker.setItemName("Default Marker");
-        marker.setTag(0);
-        marker.setMapPoint(markerPoint);
-        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
-        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
 
-        mapView.addPOIItem(marker);
+        MapPOIItem customMarker = new MapPOIItem();
+        customMarker.setItemName("ACustom Marker");
+        customMarker.setTag(1);
+        customMarker.setMapPoint(markerPoint);
+        customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
+        customMarker.setCustomImageResourceId(R.drawable.map_marker); // 마커 이미지.
+        customMarker.setCustomImageAutoscale(true); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
+        customMarker.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
+
+
+        mapView.addPOIItem(customMarker);
+        mapView.setMapCenterPoint(markerPoint, true);
+
 
         btn_zoomPlus = findViewById(R.id.btn_zoom_plus);
         btn_zoomMinus = findViewById(R.id.btn_zoom_minus);

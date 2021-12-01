@@ -35,7 +35,7 @@ public class Splash extends AppCompatActivity {
                     }
                 });
             }
-        }, 1000); //딜레이 타임 조절
+        }, 500); //딜레이 타임 조절
 
 
 
