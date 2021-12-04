@@ -21,8 +21,13 @@ public class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
 
     @Override
     public View getCalloutBalloon(MapPOIItem poiItem) {
-        ((TextView) mCalloutBalloon.findViewById(R.id.balloon_title)).setText("스탬프힌트");
-        ((TextView) mCalloutBalloon.findViewById(R.id.balloon_desc)).setText("Custom CalloutBalloon");
+        if(poiItem.getItemName().equals("현재위치")){
+            ((TextView) mCalloutBalloon.findViewById(R.id.balloon_title)).setText("현재위치");
+            ((TextView) mCalloutBalloon.findViewById(R.id.balloon_desc)).setText("");
+        }else{
+            ((TextView) mCalloutBalloon.findViewById(R.id.balloon_title)).setText("스탬프힌트");
+            ((TextView) mCalloutBalloon.findViewById(R.id.balloon_desc)).setText("Custom CalloutBalloon");
+        }
         Log.d("mapBalloon", mCalloutBalloon+"22222");
         return mCalloutBalloon;
     }
