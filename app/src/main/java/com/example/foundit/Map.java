@@ -41,11 +41,14 @@ public class Map extends AppCompatActivity implements MapView.CurrentLocationEve
     MapView mapView;
     LocationManager locationManager2;
     Location myLocation;
+    Intent mainIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        mainIntent = new Intent(this, MainActivity.class);
 
         // java code
         mapView = new MapView(this);
@@ -159,6 +162,12 @@ public class Map extends AppCompatActivity implements MapView.CurrentLocationEve
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mapViewContainer.removeAllViews();
@@ -209,7 +218,6 @@ public class Map extends AppCompatActivity implements MapView.CurrentLocationEve
             if (check_result) {
                 Log.d("@@@", "start");
                 //위치 값을 가져올 수 있음
-
             } else {
                 // 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료합니다.2 가지 경우가 있다
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
