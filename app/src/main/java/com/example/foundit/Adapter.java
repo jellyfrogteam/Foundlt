@@ -23,6 +23,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
     ArrayList<dataModel> dataModels;
     Context mContext;
     private ItemClickListener itemClickListener;
+    static String[] location_array;
     Adapter(Context context, ArrayList<dataModel> dataModels) {
         this.mContext = context;
         this.dataModels = dataModels;
@@ -61,7 +62,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
                     @Override
                     public void onClick(View v) {
                         Log.d("test", String.valueOf(position));
-                        Log.d("spinnerRV", String.valueOf(MainActivity.rvArray.get(position)));
+                        String location = MainActivity.rvArray.get(position);
+                        location_array = location.split(",");
 
                         Intent mapIntent = new Intent(mContext, Map.class);
                         mContext.startActivity(mapIntent);

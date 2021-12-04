@@ -25,6 +25,8 @@ import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
+import static com.example.foundit.Adapter.*;
+
 public class Map extends AppCompatActivity implements MapView.CurrentLocationEventListener, MapView.MapViewEventListener{
 
     private static final String LOG_TAG = "MainActivity";
@@ -110,7 +112,7 @@ public class Map extends AppCompatActivity implements MapView.CurrentLocationEve
 
 //
       //  MapPOIItem customMarker = new MapPOIItem();
-        MapPoint markerPoint= MapPoint.mapPointWithGeoCoord(37.434921215200994, 127.08022310897256);
+        MapPoint markerPoint= MapPoint.mapPointWithGeoCoord(Double.valueOf(location_array[0]), Double.valueOf(location_array[1]));
 
 //        customMarker.setItemName("Custom Marker");
 //        customMarker.setTag(1);
@@ -140,7 +142,7 @@ public class Map extends AppCompatActivity implements MapView.CurrentLocationEve
         btn_zoomPlus = findViewById(R.id.btn_zoom_plus);
         btn_zoomMinus = findViewById(R.id.btn_zoom_minus);
         // 줌 레벨 변경
-        mapView.setZoomLevel(7, true);
+        mapView.setZoomLevel(3, true);
         btn_zoomPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
