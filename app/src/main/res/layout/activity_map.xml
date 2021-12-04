@@ -16,20 +16,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btn_location"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:background="@drawable/style_btn_login"
+        android:text="여행지로"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="7dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_my_location"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
         android:id="@+id/btn_my_location"
-        android:layout_width="120dp"
+        android:layout_width="100dp"
         android:layout_height="45dp"
         android:text="현위치로"
         android:textSize="15sp"
         android:textAlignment="center"
         android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/style_btn_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
+    <ImageButton
+        android:id="@+id/qr_scanner"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/style_btn_qr"
+        app:layout_constraintBottom_toBottomOf="@+id/map_view"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QR코드를 인식하여 스탬프를 모으세요!"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/map_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 
     <LinearLayout
@@ -49,7 +85,8 @@
             android:textAlignment="center"
             android:text="+"
             android:textSize="30sp"
-            android:background="@drawable/style_btn_zoom" />
+            android:background="@drawable/style_btn_login"
+            android:layout_marginBottom="7dp"/>
 
         <Button
             android:id="@+id/btn_zoom_minus"
@@ -58,7 +95,7 @@
             android:textAlignment="center"
             android:text="-"
             android:textSize="30sp"
-            android:background="@drawable/style_btn_zoom" />
+            android:background="@drawable/style_btn_login" />
     </LinearLayout>
 
 

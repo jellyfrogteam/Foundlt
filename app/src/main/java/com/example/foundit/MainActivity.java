@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         ArrayList<dataModel> dataModels = new ArrayList();
-        dataModels.add(new dataModel("안산호수공원","안산시 안산로",R.drawable.jjj1,"3"));
+    //    dataModels.add(new dataModel("안산호수공원","안산시 안산로",R.drawable.jjj1,"3"));
 //        dataModels.add(new dataModel("안산호수공원2","안산시 안산로232",R.drawable.samplebg,"5"));
 //        dataModels.add(new dataModel("안산호수공원3","안산시 안산로323",R.drawable.samplebg,"2"));
 //        dataModels.add(new dataModel("안산호수공원4","안산시 안산로434",R.drawable.samplebg,"6"));
@@ -109,8 +109,8 @@ public class MainActivity extends AppCompatActivity {
                         rvArray.clear();
                         dataModels.add(new dataModel("롯데월드","서울 송파구 올림픽로 240",R.drawable.lotteworld_img,"(최대)3!"));
                         dataModels.add(new dataModel("여의도 한강공원","서울 영등포구 여의동로 330 한강사업본부 여의도안내센터",R.drawable.hangang_img,"(최대)5!"));
-                        rvArray.add("37.51125194753548, 127.09813481146018");
-                        rvArray.add("37.52854099043265, 126.93307809796607");
+                        rvArray.add("37.51125194753548, 127.09813481146018, 1.아***스 \n 2.***급 \n 3.*이*드*");
+                        rvArray.add("37.52854099043265, 126.93307809796607, 1.터*분수 \n 2.자***여소 \n 3.**무대");
                         adapter.notifyDataSetChanged();
                         break;
                     }
@@ -118,9 +118,9 @@ public class MainActivity extends AppCompatActivity {
                         dataModels.clear();
                         rvArray.clear();
                         dataModels.add(new dataModel("송월동동화마을","인천 중구 송월동3가",R.drawable.donghwa_img,"(최대)3!"));
-                        dataModels.add(new dataModel("월미도","인천 중구 북성동1가 98-352",R.drawable.wallmido_img,"(최대)4!"));
-                        rvArray.add("37.47773770851114, 126.62055051145941");
-                        rvArray.add("37.47580812491862, 126.59747144684934");
+                        dataModels.add(new dataModel("월미테마파크","인천광역시 중구 북성동 월미문화로 81",R.drawable.wallmido_img,"(최대)4!"));
+                        rvArray.add("37.47773770851114, 126.62055051145941, 1.인**주 \n 2.도**방망이 \n 3.이상*나*의**스");
+                        rvArray.add("37.47146273512526, 126.5962977268001, 1.디*코 \n 2.**킹 \n 3.*퍼*");
                         adapter.notifyDataSetChanged();
                         break;
                     }
@@ -129,8 +129,8 @@ public class MainActivity extends AppCompatActivity {
                         rvArray.clear();
                         dataModels.add(new dataModel("에버랜드","경기 용인시 처인구 포곡읍 에버랜드로 199",R.drawable.everland_img,"(최대)3!"));
                         dataModels.add(new dataModel("한국민속촌","경기 용인시 기흥구 민속촌로 90 한국민속촌",R.drawable.min_img,"(최대)5!"));
-                        rvArray.add("37.29439860788894, 127.20237434795669");
-                        rvArray.add("37.25860693222674, 127.1169528005702");
+                        rvArray.add("37.29439860788894, 127.20237434795669, 1.**프*스 \n 2.아***스프*스 \n 3.**풀스");
+                        rvArray.add("37.25860693222674, 127.1169528005702, 1.패***스타 \n 2.대*간 \n 3.선*집");
                         adapter.notifyDataSetChanged();
                         break;
                     }
@@ -139,8 +139,8 @@ public class MainActivity extends AppCompatActivity {
                         rvArray.clear();
                         dataModels.add(new dataModel("대관령양떼목장","강원 평창군 대관령면 대관령마루길 483-32 대관령양떼목장",R.drawable.sheep_img,"(최대)5!"));
                         dataModels.add(new dataModel("bts 버스정류장","강원 강릉시 주문진읍 향호리 8-55",R.drawable.bts_img,"(최대)1!"));
-                        rvArray.add("37.68866627429973, 128.75276782680464");
-                        rvArray.add("37.91238328961611, 128.81702674030342");
+                        rvArray.add("37.68866627429973, 128.75276782680464, 1.*네 \n 2.올*이*못 \n 3.*막");
+                        rvArray.add("37.91238328961611, 128.81702674030342, 1.힌트없음");
                         adapter.notifyDataSetChanged();
                         break;
                     }
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                         dataModels.clear();
                         rvArray.clear();
                         dataModels.add(new dataModel("청주랜드동물원","충북 청주시 상당구 명암로 224",R.drawable.cheong_img,"(최대)3!"));
-                        rvArray.add("36.65210592638873, 127.52308955749714");
+                        rvArray.add("36.65210592638873, 127.52308955749714, 1.하**나 \n 2.히*라***이 \n 3.다***숭이");
                         adapter.notifyDataSetChanged();
                         break;
                     }
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                         dataModels.clear();
                         rvArray.clear();
                         dataModels.add(new dataModel("경주월드","경북 경주시 보문로 544",R.drawable.gyongworld_img,"(최대)4!"));
-                        rvArray.add("35.837192957157754, 129.28231292676747");
+                        rvArray.add("35.837192957157754, 129.28231292676747, 1.*라* \n 2.발** \n 3.토**도");
                         adapter.notifyDataSetChanged();
                         break;
                     }
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                         dataModels.clear();
                         rvArray.clear();
                         dataModels.add(new dataModel("전주 한옥마을","전북 전주시 완산구 기린대로 99",R.drawable.hanok_img,"(최대)5!"));
-                        rvArray.add("35.81430238443171, 127.15003221327255");
+                        rvArray.add("35.81430238443171, 127.15003221327255, 1.하*비 \n 2.한*당 \n 3.전**당");
                         adapter.notifyDataSetChanged();
                         break;
                     }

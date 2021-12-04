@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Splash extends AppCompatActivity {
 
     @Override
@@ -21,7 +23,7 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         ConstraintLayout splashLayout = findViewById(R.id.splashLayout);
-        Intent mainIntent = new Intent(this,MainActivity.class);
+        Intent login = new Intent(this,Login.class);
 
 
         Handler handler = new Handler();
@@ -31,7 +33,8 @@ public class Splash extends AppCompatActivity {
                 splashLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(mainIntent);
+                        startActivity(login);
+                        finish();
                     }
                 });
             }
@@ -85,5 +88,6 @@ public class Splash extends AppCompatActivity {
             }
         }
     }
+
 
 }

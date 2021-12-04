@@ -97,6 +97,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
             stamp_cnt = itemView.findViewById(R.id.stamp_cnt);
             findStamp = itemView.findViewById(R.id.find_stamp);
 
+
         }
     }
 }

@@ -33,6 +33,7 @@ public class Map extends AppCompatActivity implements MapView.CurrentLocationEve
     Button btn_zoomPlus;
     Button btn_zoomMinus;
     Button btn_myLocation;
+    Button btn_Location;
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION};
@@ -87,22 +88,18 @@ public class Map extends AppCompatActivity implements MapView.CurrentLocationEve
             public void onClick(View v) {
                 double myLatitude = myLocation.getLatitude();
                 double myLongitude = myLocation.getLongitude();
-                Log.d("myLocation",  "위도, 경도: "+ myLatitude +" , "+ myLongitude);
-                MapPoint myMarkerPoint= MapPoint.mapPointWithGeoCoord(myLatitude, myLongitude);
-                mapView.setMapCenterPoint(myMarkerPoint, true);
-                mapView.setZoomLevel(3, true);
-                mapView.zoomIn(true);
-                MapPOIItem marker = new MapPOIItem();
-                marker.setItemName("현재위치");
-                marker.setTag(1);
-                marker.setMapPoint(myMarkerPoint);
-                marker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
-                marker.setCustomImageResourceId(R.drawable.map_marker); // 마커 이미지.
-                marker.setCustomImageAutoscale(true); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
-                marker.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
+                setLocationMarker(myLatitude, myLongitude,"현재위치");
+            }
+        });
 
-                mapView.addPOIItem(marker);
 
+        btn_Location = findViewById(R.id.btn_location);
+        btn_Location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double myLatitude = Double.parseDouble(location_array[0]);
+                double myLongitude = Double.parseDouble(location_array[1]);
+                setLocationMarker(myLatitude, myLongitude,"여행지");
             }
         });
         
@@ -112,7 +109,7 @@ public class Map extends AppCompatActivity implements MapView.CurrentLocationEve
 
 //
       //  MapPOIItem customMarker = new MapPOIItem();
-        MapPoint markerPoint= MapPoint.mapPointWithGeoCoord(Double.valueOf(location_array[0]), Double.valueOf(location_array[1]));
+        MapPoint markerPoint= MapPoint.mapPointWithGeoCoord(Double.parseDouble(location_array[0]), Double.parseDouble(location_array[1]));
 
 //        customMarker.setItemName("Custom Marker");
 //        customMarker.setTag(1);
@@ -142,7 +139,7 @@ public class Map extends AppCompatActivity implements MapView.CurrentLocationEve
         btn_zoomPlus = findViewById(R.id.btn_zoom_plus);
         btn_zoomMinus = findViewById(R.id.btn_zoom_minus);
         // 줌 레벨 변경
-        mapView.setZoomLevel(3, true);
+        mapView.setZoomLevel(1, true);
         btn_zoomPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -224,6 +221,34 @@ public class Map extends AppCompatActivity implements MapView.CurrentLocationEve
             }
         }
     }
+
+    void setLocationMarker(double myLatitude,double myLongitude, String itemName) {
+        Log.d("myLocation",  "위도, 경도: "+ myLatitude +" , "+ myLongitude);
+        MapPoint myMarkerPoint= MapPoint.mapPointWithGeoCoord(myLatitude, myLongitude);
+        mapView.setMapCenterPoint(myMarkerPoint, true);
+        mapView.setZoomLevel(1, true);
+        mapView.zoomIn(true);
+        MapPOIItem marker = new MapPOIItem();
+        marker.setItemName(itemName);
+        marker.setTag(1);
+        marker.setMapPoint(myMarkerPoint);
+        if(itemName.equals("현재위치")){
+            marker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
+            marker.setCustomImageResourceId(R.drawable.my_location); // 마커 이미지.
+            marker.setCustomImageAutoscale(true); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
+        }
+        else{
+            marker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
+            marker.setCustomImageResourceId(R.drawable.map_marker); // 마커 이미지.
+            marker.setCustomImageAutoscale(true); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
+        }
+
+
+        marker.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
+
+        mapView.addPOIItem(marker);
+    }
+
 
     void checkRunTimePermission(){
 

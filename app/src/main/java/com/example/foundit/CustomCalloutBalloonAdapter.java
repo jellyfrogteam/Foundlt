@@ -25,10 +25,10 @@ public class CustomCalloutBalloonAdapter implements CalloutBalloonAdapter {
             ((TextView) mCalloutBalloon.findViewById(R.id.balloon_title)).setText("현재위치");
             ((TextView) mCalloutBalloon.findViewById(R.id.balloon_desc)).setText("");
         }else{
-            ((TextView) mCalloutBalloon.findViewById(R.id.balloon_title)).setText("스탬프힌트");
-            ((TextView) mCalloutBalloon.findViewById(R.id.balloon_desc)).setText("Custom CalloutBalloon");
+            ((TextView) mCalloutBalloon.findViewById(R.id.balloon_title)).setText("힌트!!");
+            ((TextView) mCalloutBalloon.findViewById(R.id.balloon_desc)).setText(Adapter.location_array[2]);
         }
-        Log.d("mapBalloon", mCalloutBalloon+"22222");
+
         return mCalloutBalloon;
     }
 

@@ -113,27 +113,27 @@ google_login.setOnClickListener(new View.OnClickListener() {
 
 public void updateKakaoLoginUi(){
         // 카카오 UI 가져오는 메소드 (로그인 핵심 기능)
-        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>(){
-@Override
-public Unit invoke(User user,Throwable throwable){
-        if(user!=null){
-        // 유저 정보가 정상 전달 되었을 경우
-        Log.i(TAG,"id "+user.getId());   // 유저의 고유 아이디를 불러옵니다.
-        Log.i(TAG,"invoke: nickname="+user.getKakaoAccount().getProfile().getNickname());  // 유저의 닉네임을 불러옵니다.
-        Log.i(TAG,"userimage "+user.getKakaoAccount().getProfile().getProfileImageUrl());    // 유저의 이미지 URL을 불러옵니다.
+    UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+        @Override
+        public Unit invoke(User user, Throwable throwable) {
+            if (user != null) {
+                // 유저 정보가 정상 전달 되었을 경우
+                Log.i(TAG, "id " + user.getId());   // 유저의 고유 아이디를 불러옵니다.
+                Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());  // 유저의 닉네임을 불러옵니다.
+                Log.i(TAG, "userimage " + user.getKakaoAccount().getProfile().getProfileImageUrl());    // 유저의 이미지 URL을 불러옵니다.
 
-        // 이 부분에는 로그인이 정상적으로 되었을 경우 어떤 일을 수행할 지 적으면 됩니다.
+                // 이 부분에는 로그인이 정상적으로 되었을 경우 어떤 일을 수행할 지 적으면 됩니다.
+            }
+            if (throwable != null) {
+                // 로그인 시 오류 났을 때
+                // 키해시가 등록 안 되어 있으면 오류 납니다.
+                Log.w(TAG, "invoke: " + throwable.getLocalizedMessage());
+            }
+            return null;
         }
-        if(throwable!=null){
-        // 로그인 시 오류 났을 때
-        // 키해시가 등록 안 되어 있으면 오류 납니다.
-        Log.w(TAG,"invoke: "+throwable.getLocalizedMessage());
-        }
-        return null;
-        }
-        });
+    });
 
-        }
+}
   /*  private void kakaoLogin() {
         TestKakaoLogin.getInstance().setListener(this);
         TestKakaoLogin.getInstance().login(this);
@@ -171,6 +171,7 @@ public Unit invoke(User user,Throwable throwable){
                             FirebaseUser user = mAuth.getCurrentUser();
                             Intent main = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(main);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
 
