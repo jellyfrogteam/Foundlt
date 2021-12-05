@@ -1,43 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.foundit">
 
-    <!-- 인터넷 사용 권한 설정-->
+    <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
+    <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FoundIt"
-        android:name=".GlobalApplication"
-        android:networkSecurityConfig="@xml/network_security_config">
+        android:theme="@style/Theme.FoundIt">
+        <activity
+            android:name=".QRcodeScan"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            />
 
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="4501290d024e16e12f7bb36c771d585f"/>
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="4501290d024e16e12f7bb36c771d585f" />
 
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation" />
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <!-- Redirect URI: "kakao4501290d024e16e12f7bb36c771d585f://oauth" -->
-                <data android:host="oauth"
+                <data
+                    android:host="oauth"
                     android:scheme="kakao4501290d024e16e12f7bb36c771d585f" />
             </intent-filter>
         </activity>
-        <activity android:name=".Map">
-
-        </activity>
+        <activity android:name=".Map"></activity>
         <activity android:name=".Shop" />
         <activity android:name=".MyPage" />
-        <activity android:name=".Splash"
+        <activity
+            android:name=".Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,14 +62,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login"
-            android:exported="true">
+        <activity
+            android:name=".Login"
+            android:exported="true"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"></activity>
 
-    </activity>
-        <activity android:name=".MainActivity"
-            android:exported="true">
-
-        </activity>
     </application>
 
 </manifest>

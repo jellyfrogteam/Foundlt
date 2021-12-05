@@ -11,9 +11,11 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.kakao.util.maps.helper.Utility;
 
 public class Splash extends AppCompatActivity {
 
@@ -39,7 +41,6 @@ public class Splash extends AppCompatActivity {
                 });
             }
         }, 500); //딜레이 타임 조절
-
 
 
         // 권한ID를 가져옵니다

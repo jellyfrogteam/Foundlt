@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import net.daum.mf.map.api.MapPOIItem;
@@ -34,6 +35,7 @@ public class Map extends AppCompatActivity implements MapView.CurrentLocationEve
     Button btn_zoomMinus;
     Button btn_myLocation;
     Button btn_Location;
+    ImageButton qr_scanner;
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION};
@@ -42,6 +44,7 @@ public class Map extends AppCompatActivity implements MapView.CurrentLocationEve
     LocationManager locationManager2;
     Location myLocation;
     Intent mainIntent;
+    Intent qrcodescan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class Map extends AppCompatActivity implements MapView.CurrentLocationEve
         setContentView(R.layout.activity_map);
 
         mainIntent = new Intent(this, MainActivity.class);
+        qrcodescan = new Intent(this,QRcodeScan.class);
 
         // java code
         mapView = new MapView(this);
@@ -159,6 +163,13 @@ public class Map extends AppCompatActivity implements MapView.CurrentLocationEve
             }
         });
 
+        qr_scanner = findViewById(R.id.qr_scanner);
+        qr_scanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(qrcodescan);
+            }
+        });
     }
 
     @Override
