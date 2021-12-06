@@ -26,9 +26,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,6 +55,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+
+        if(acct.getId() == null){
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference(acct.getId());
+            myRef.child("stampCnt").setValue(0);
+        }
 
         ArrayList<dataModel> dataModels = new ArrayList();
     //    dataModels.add(new dataModel("안산호수공원","안산시 안산로",R.drawable.jjj1,"3"));
