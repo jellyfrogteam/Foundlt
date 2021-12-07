@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     TextView profile_name;
     Spinner spinner;
     Intent mapIntent;
+    TextView coin_count;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     GoogleSignInAccount acct_db;
     DatabaseReference myRef;
@@ -227,4 +228,33 @@ public class MainActivity extends AppCompatActivity {
                 .into(imv);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        coin_count = findViewById(R.id.coin_count);
+        acct_db = GoogleSignIn.getLastSignedInAccount(this);
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference(acct_db.getId());
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot i : snapshot.child("stampCnt").getChildren()){
+                    myStampCnt = (long) i.getValue();
+                    Log.d("Main_Resume_마이스탬프Count", myStampCnt+"");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        // $$$$$$$$$$$$$$$$$$$$$$$여기 오류
+    //    coin_count.setText((int) myStampCnt);
+
+
+    }
 }
