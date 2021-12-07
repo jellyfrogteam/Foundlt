@@ -1,5 +1,7 @@
 package com.example.foundit;
 
+import static com.example.foundit.MainActivity.myStampCnt;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,7 +44,6 @@ public class QRcodeScan extends AppCompatActivity {
     DatabaseReference myRef;
     FirebaseDatabase database;
     GoogleSignInAccount acct;
-    long myStampCnt;
     ArrayList<String> arr = new ArrayList<>();
 
     @Override
@@ -62,7 +63,7 @@ public class QRcodeScan extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 //myStampCnt = Integer.parseInt(String.valueOf(snapshot.child("stampCnt").getValue()));
                 for(DataSnapshot i : snapshot.child("stampCnt").getChildren()){
-                    myStampCnt = (long) i.getValue();
+                   myStampCnt = (long) i.getValue();
                     Log.d("마이스탬프Count", myStampCnt+"");
                 }
 

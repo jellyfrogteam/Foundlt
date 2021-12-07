@@ -31,8 +31,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.kakao.util.maps.helper.Utility;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
     Spinner spinner;
     Intent mapIntent;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    GoogleSignInAccount acct_db;
+    DatabaseReference myRef;
+    FirebaseDatabase database;
+    static long myStampCnt;
     static ArrayList<String> rvArray = new ArrayList<>();
 
 
@@ -55,13 +63,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        acct_db = GoogleSignIn.getLastSignedInAccount(this);
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference(acct_db.getId());
 
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if(acct.getId() == null){
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference(acct.getId());
             myRef.child("stampCnt").setValue(0);
         }
+
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot i : snapshot.child("stampCnt").getChildren()){
+                    myStampCnt = (long) i.getValue();
+                    Log.d("Main_마이스탬프Count", myStampCnt+"");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         ArrayList<dataModel> dataModels = new ArrayList();
     //    dataModels.add(new dataModel("안산호수공원","안산시 안산로",R.drawable.jjj1,"3"));
