@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         acct_db = GoogleSignIn.getLastSignedInAccount(this);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference(acct_db.getId());
+        coin_count = findViewById(R.id.coin_count);
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if(acct.getId() == null){
@@ -83,15 +84,15 @@ public class MainActivity extends AppCompatActivity {
                     myStampCnt = (long) i.getValue();
                     Log.d("Main_마이스탬프Count", myStampCnt+"");
                 }
+                coin_count.setText(String.valueOf(myStampCnt));
+
 
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-
         ArrayList<dataModel> dataModels = new ArrayList();
     //    dataModels.add(new dataModel("안산호수공원","안산시 안산로",R.drawable.jjj1,"3"));
 //        dataModels.add(new dataModel("안산호수공원2","안산시 안산로232",R.drawable.samplebg,"5"));
@@ -243,6 +244,7 @@ public class MainActivity extends AppCompatActivity {
                     myStampCnt = (long) i.getValue();
                     Log.d("Main_Resume_마이스탬프Count", myStampCnt+"");
                 }
+                coin_count.setText(String.valueOf(myStampCnt));
 
             }
 
@@ -252,8 +254,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // $$$$$$$$$$$$$$$$$$$$$$$여기 오류
-    //    coin_count.setText((int) myStampCnt);
 
 
     }
