@@ -29,6 +29,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +39,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.kakao.util.maps.helper.Utility;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,13 +51,17 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ImageView userImg;
     TextView profile_name;
+    TextView profile_level;
     Spinner spinner;
     Intent mapIntent;
     TextView coin_count;
+    ImageView profile_img;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     GoogleSignInAccount acct_db;
     DatabaseReference myRef;
     FirebaseDatabase database;
+    long stampTotal;
+
     static long myStampCnt;
     static ArrayList<String> rvArray = new ArrayList<>();
 
@@ -64,16 +72,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        profile_level = findViewById(R.id.profile_level);
+        profile_img = findViewById(R.id.profile_img);
         acct_db = GoogleSignIn.getLastSignedInAccount(this);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference(acct_db.getId());
         coin_count = findViewById(R.id.coin_count);
+        Intent my_page = new Intent(this,MyPage.class);
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+
         if(acct.getId() == null){
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference(acct.getId());
-            myRef.child("stampCnt").setValue(0);
+            //FirebaseDatabase database = FirebaseDatabase.getInstance();
+            //DatabaseReference myRef = database.getReference(acct.getId());
+            myRef.child("stampCnt").child("cnt").setValue(0);
+            myRef.child("stampTotal").child("cnt").setValue(0);
         }
 
 
@@ -220,6 +233,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        profile_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(my_page);
+            }
+        });
+
+
     }
 
     public void SlicedImg(Context context, String url, ImageView imv){
@@ -246,6 +267,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 coin_count.setText(String.valueOf(myStampCnt));
 
+                for(DataSnapshot i : snapshot.child("stampTotal").getChildren()){
+                    stampTotal = (long) i.getValue();
+                    Log.d("Main_마이스탬프Total", stampTotal+"");
+                }
+                profile_level.setText(String.valueOf(stampTotal/10));
             }
 
             @Override

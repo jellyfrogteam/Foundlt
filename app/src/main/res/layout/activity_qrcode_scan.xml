@@ -9,14 +9,28 @@
 
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/stamp_sf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="스탬프 획득에 성공 하였습니다!"
+        android:layout_marginTop="250dp"
+        android:text="스탬프 획득"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/next_main"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:background="@drawable/style_btn_login"
+        android:text="메인으로 가기"
+        android:textSize="20dp"
+        android:textStyle="normal"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stamp_sf" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

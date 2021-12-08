@@ -57,24 +57,9 @@ public class Login extends AppCompatActivity{
 
        // String keyHash = Utility.getKeyHash(this);
         Intent main = new Intent(getApplicationContext(), MainActivity.class);
-        kakao_login = findViewById(R.id.btn_kakao_login);
+
         google_login = findViewById(R.id.btn_google_login);
 
-        Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
-            @Override
-            public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
-                if (oAuthToken != null) {
-                    Log.i("user", oAuthToken.getAccessToken() + " " + oAuthToken.getRefreshToken());
-                }
-                if (throwable != null) {
-                    // TBD
-                    Log.w(TAG, "invoke: " + throwable.getLocalizedMessage());
-                }
-                updateKakaoLoginUi();
-
-                return null;
-            }
-        };
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -97,55 +82,10 @@ google_login.setOnClickListener(new View.OnClickListener() {
         signIn();
     }
 });
-        kakao_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(Login.this)) {
-                    // 카카오톡이 있을 경우?
-                    UserApiClient.getInstance().loginWithKakaoTalk(Login.this, callback);
-                } else {
-                    UserApiClient.getInstance().loginWithKakaoAccount(Login.this, callback);
-                }
-            }
-        });
-        updateKakaoLoginUi();
 
             }
 
-public void updateKakaoLoginUi(){
-        // 카카오 UI 가져오는 메소드 (로그인 핵심 기능)
-    UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
-        @Override
-        public Unit invoke(User user, Throwable throwable) {
-            if (user != null) {
-                // 유저 정보가 정상 전달 되었을 경우
-                Log.i(TAG, "id " + user.getId());   // 유저의 고유 아이디를 불러옵니다.
-                Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());  // 유저의 닉네임을 불러옵니다.
-                Log.i(TAG, "userimage " + user.getKakaoAccount().getProfile().getProfileImageUrl());    // 유저의 이미지 URL을 불러옵니다.
 
-                // 이 부분에는 로그인이 정상적으로 되었을 경우 어떤 일을 수행할 지 적으면 됩니다.
-            }
-            if (throwable != null) {
-                // 로그인 시 오류 났을 때
-                // 키해시가 등록 안 되어 있으면 오류 납니다.
-                Log.w(TAG, "invoke: " + throwable.getLocalizedMessage());
-            }
-            return null;
-        }
-    });
-
-}
-  /*  private void kakaoLogin() {
-        TestKakaoLogin.getInstance().setListener(this);
-        TestKakaoLogin.getInstance().login(this);
-        Log.d("error", "hi");
-    }
-    @Override
-    public void onKakaoLoginResult(User user) {
-        //콜백메서드
-
-    }*/
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
       super.onActivityResult(requestCode, resultCode, data);

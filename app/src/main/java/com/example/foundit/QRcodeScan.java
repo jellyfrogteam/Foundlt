@@ -10,6 +10,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -44,7 +47,9 @@ public class QRcodeScan extends AppCompatActivity {
     DatabaseReference myRef;
     FirebaseDatabase database;
     GoogleSignInAccount acct;
+    Button next_main;
     ArrayList<String> arr = new ArrayList<>();
+    long myStamp_ToT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +57,18 @@ public class QRcodeScan extends AppCompatActivity {
         setContentView(R.layout.activity_qrcode_scan);
         initQRcodeScanner();
 
+        next_main= findViewById(R.id.next_main);
+        Intent main = new Intent(this,MainActivity.class);
         Log.d("ttt2", "언제실행되나");
+
+
+        next_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(main);
+            }
+        });
+
 
         acct = GoogleSignIn.getLastSignedInAccount(this);
         database = FirebaseDatabase.getInstance();
@@ -65,6 +81,11 @@ public class QRcodeScan extends AppCompatActivity {
                 for(DataSnapshot i : snapshot.child("stampCnt").getChildren()){
                    myStampCnt = (long) i.getValue();
                     Log.d("마이스탬프Count", myStampCnt+"");
+                }
+
+                for(DataSnapshot i : snapshot.child("stampTotal").getChildren()){
+                    myStamp_ToT = (long) i.getValue();
+                    Log.d("마이스탬프Total", myStamp_ToT+"");
                 }
 
 
@@ -163,12 +184,23 @@ public class QRcodeScan extends AppCompatActivity {
                         Log.d("ttt", "스탬프코드: "+stampCode);
                         Log.d("ttt", "스탬프갯수: "+stampCnt);
 
-
                         if(stampArray[0].equals(scanQR_code) && !arr.contains(stampCode)){
                             Log.d("tttt3","합격");
                             myRef.child("myStamp").push().setValue(scanQR_code);
                             long cntTotal = myStampCnt+stampCnt;
                             myRef.child("stampCnt").child("cnt").setValue(cntTotal);
+
+                            myStamp_ToT += stampCnt;
+                            myRef.child("stampTotal").child("cnt").setValue(myStamp_ToT);
+                            Log.d("마이스탬프TotalSet", myStamp_ToT+"");
+
+                            TextView stampText = findViewById(R.id.stamp_sf);
+                            stampText.setText("스탬프 획득에 성공했습니다!");
+
+                            break;
+                        } else{
+                            TextView stampText = findViewById(R.id.stamp_sf);
+                            stampText.setText("스탬프 획득에 실패했습니다!");
                         }
                     }
 
